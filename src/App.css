@@ -1,0 +1,130 @@
+ .container {
+  width: calc(100vw - 500px);
+  height: 100%;
+  background-color: #fff;
+  margin: 50px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-width: 1400px;
+  padding: 20px;
+ }
+
+h3{
+  text-transform: uppercase;
+}
+
+.balance {
+  display: flex;
+ justify-content: space-between;
+
+}
+
+.balance-title {
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.balance-value {
+  display: flex;
+}
+
+.usdt,
+.erc20-inline {
+  display: inline-block; 
+}
+
+.erc20-inline {
+  position: relative;
+  
+}
+
+
+.receive-amount {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.from-text {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.balance, .amount {
+  font-size: 16px;
+}
+
+.amount {
+  display: flex;
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.clear-button, .currency-button, .remove-button, .add-wallet-button, .withdraw-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+
+.clear-button {
+  background-color: #eeeeee;
+}
+
+.currency-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.remove-button {
+  background-color: #dc3545;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.add-wallet-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.withdraw-button {
+  width: 100%;
+  background-color: #ffc107;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.usdt-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+}
+
+.green {
+  color: #28a745;
+}
+
+.usdt {
+  display: block;
+}
+
+.erc20 {
+  display: block;
+  font-size: 10px;
+}
