@@ -1,10 +1,11 @@
-import { useState } from "react";
-import "./App.css";
+import { useCallback, useState } from "react";
+import styles from "./App.module.scss";
 import { v4 as uuidv4 } from "uuid";
 import TotalAmount from "./components/TotalAmount";
 import WalletRowComponent from "./components/WalletRowComponent";
 import { useFileHandler } from "./hooks/useFileHandler";
 import { useDropzone } from "react-dropzone";
+import Balance from "./components/Balance";
 
 interface WalletRowProps {
   id: string;
@@ -24,19 +25,23 @@ const App: React.FC = () => {
     ]);
   };
 
-  const handleInputChange = (
-    id: string,
-    type: "wallet" | "amount",
-    value: string
-  ) => {
-    setWalletRows(
-      walletRows.map((row) => (row.id === id ? { ...row, [type]: value } : row))
-    );
-  };
+  const handleInputChange = useCallback(
+    (id: string, type: "wallet" | "amount", value: string) => {
+      setWalletRows(
+        walletRows.map((row) =>
+          row.id === id ? { ...row, [type]: value } : row
+        )
+      );
+    },
+    [walletRows]
+  );
 
-  const handleRemoveRow = (id: string) => {
-    setWalletRows(walletRows.filter((row) => row.id !== id));
-  };
+  const handleRemoveRow = useCallback(
+    (id: string) => {
+      setWalletRows(walletRows.filter((row) => row.id !== id));
+    },
+    [walletRows]
+  );
 
   const onDrop = useFileHandler(setWalletRows);
 
@@ -56,35 +61,25 @@ const App: React.FC = () => {
     .toFixed(2);
 
   return (
-    <div className="container" {...getRootProps()}>
+    <div className={styles.container} {...getRootProps()}>
       <input {...getInputProps()} style={{ display: "none" }} />
       <h3>FORM</h3>
-      <div className="balance">
-        <div className="balance-title">Balance USDT (ERC-20)</div>
-        <div className="balance-value green">
-          <span className="balance-amount">141 241.5121 </span>
-          <div className="usdt-container">
-            <span className="usdt">USDT</span>
-            <span className="erc20">(ERC-20)</span>
-          </div>
-        </div>
-      </div>
-
+      <Balance />
       {walletRows.map((row) => (
         <WalletRowComponent
           key={row.id}
-          row={row}
+          {...row}
           handleInputChange={handleInputChange}
           handleRemoveRow={handleRemoveRow}
         />
       ))}
-      <div className="actions">
-        <button className="add-wallet-button" onClick={handleAddRow}>
+      <div className={styles.actions}>
+        <button className={styles.addWalletButton} onClick={handleAddRow}>
           Add new wallet
         </button>
       </div>
       <TotalAmount total={totalAmount} />
-      <button className="withdraw-button">Withdraw</button>
+      <button className={styles.withdrawButton}>Withdraw</button>
     </div>
   );
 };

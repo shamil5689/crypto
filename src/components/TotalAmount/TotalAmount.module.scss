@@ -1,0 +1,13 @@
+@import '../../styles/common.scss';
+
+.receiveAmount {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  
+  .amount {
+    display: flex;
+    color: $green-color;
+  }

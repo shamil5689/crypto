@@ -1,10 +1,10 @@
-// WalletRowComponent.js или WalletRowComponent.tsx
+import React, { memo } from "react";
+import styles from "./WalletRowComponent.module.scss";
+
 interface WalletRowProps {
-  row: {
-    id: string;
-    wallet: string;
-    amount: string;
-  };
+  id: string;
+  wallet: string;
+  amount: string;
   handleInputChange: (
     id: string,
     type: "wallet" | "amount",
@@ -13,30 +13,33 @@ interface WalletRowProps {
   handleRemoveRow: (id: string) => void;
 }
 
-const WalletRowComponent: React.FC<WalletRowProps> = ({
-  row,
-  handleInputChange,
-  handleRemoveRow,
-}) => {
-  return (
-    <div className="input-container">
-      <input
-        type="text"
-        placeholder="wallet address"
-        value={row.wallet}
-        onChange={(e) => handleInputChange(row.id, "wallet", e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="amount"
-        value={row.amount}
-        onChange={(e) => handleInputChange(row.id, "amount", e.target.value)}
-      />
-      <button className="remove-button" onClick={() => handleRemoveRow(row.id)}>
-        Remove
-      </button>
-    </div>
-  );
-};
+const WalletRowComponent: React.FC<WalletRowProps> = memo(
+  ({ id, wallet, amount, handleInputChange, handleRemoveRow }) => {
+    return (
+      <div className={styles.inputContainer}>
+        <input
+          className={styles.walletInput}
+          type="text"
+          placeholder="wallet address"
+          value={wallet}
+          onChange={(e) => handleInputChange(id, "wallet", e.target.value)}
+        />
+        <input
+          className={styles.amountInput}
+          type="text"
+          placeholder="amount"
+          value={amount}
+          onChange={(e) => handleInputChange(id, "amount", e.target.value)}
+        />
+        <button
+          className={styles.removeButton}
+          onClick={() => handleRemoveRow(id)}
+        >
+          Remove
+        </button>
+      </div>
+    );
+  }
+);
 
 export default WalletRowComponent;
